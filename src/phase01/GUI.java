@@ -55,7 +55,15 @@ public class GUI extends ApplicationWindow {
 		lblInput.setText("Input");
 		
 		txtInput = new Text(container, SWT.BORDER);
-		
+		// modifyText Event
+		txtInput.addModifyListener(new ModifyListener() {
+			@Override
+		    public void modifyText(ModifyEvent e) {
+		    	int dumb = txtInput.getText().length();
+		    	// setText to label currently have some bug
+		    	// lblNumberCharacters.setText(Integer.toString(dumb));
+		    }
+		});
 		txtInput.setBounds(101, 4, 395, 25);
 		
 		Button btnFormatAll = new Button(container, SWT.NONE);
