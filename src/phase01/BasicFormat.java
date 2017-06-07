@@ -4,8 +4,8 @@ public class BasicFormat {
 
 	/************************** Attribute ************************/
 	private String input; // Input from user
-	private static int lengthText = 0; // Total characters
-	private static int wordCount = 0; // Total words
+	public static int lengthText = 0; // Total characters
+	public static int wordCount = 0; // Total words
 
 	
 	// Constructor with parameter
@@ -40,12 +40,12 @@ public class BasicFormat {
 	}
 	
 	// Count Character
-	protected static int countCharacter() {
+	public static int countCharacter(char c) {
 		return lengthText++;
 	}
 	
 	// Count Words
-	protected static int countWords(char c) {
+	public static int countWords(char c) {
 		return wordCount++;
 		
 		
