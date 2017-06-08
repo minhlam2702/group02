@@ -26,12 +26,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class GUI extends ApplicationWindow {
 	private Text txtInput;
-	private Text listNumbers;
 	private Label lblNumberCharacters;
-	private AdvanceFormat format = new AdvanceFormat("");
+	private Label lblNumberWords;
+	private Text txtNumberResult;
+	private Text txtReformatResult;
+	private Text txtBreakResult;
+	private Text txtSortResult;
+	private Text txtCaseFResult;
+	private Text txtAddLineResult;
+	private TextUtilities format = new TextUtilities("");
 
 	/**
 	 * Create the application window.
@@ -49,13 +56,19 @@ public class GUI extends ApplicationWindow {
 	 */
 	@Override
 	protected Control createContents(Composite parent) {
-		Composite container = new Composite(parent, SWT.NONE);
+		parent.setForeground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
+		parent.setEnabled(false);
+		Composite container = new Composite(parent, SWT.NO_BACKGROUND);
+		container.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
+		container.setFont(SWTResourceManager.getFont("Segoe UI Semibold", 12, SWT.NORMAL));
 		
-		Label lblInput = new Label(container, SWT.NONE);
-		lblInput.setBounds(30, 7, 34, 15);
-		lblInput.setText("Input");
+		Label lblInput = new Label(container, SWT.WRAP | SWT.SHADOW_IN | SWT.CENTER);
+		lblInput.setAlignment(SWT.CENTER);
+		lblInput.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
+		lblInput.setBounds(24, 31, 86, 46);
+		lblInput.setText("User Input");
 		
-		txtInput = new Text(container, SWT.BORDER);
+		txtInput = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
 		// modifyText Event of txtInput
 		txtInput.addModifyListener(new ModifyListener() {
 			@Override
@@ -65,7 +78,7 @@ public class GUI extends ApplicationWindow {
 		    	lblNumberCharacters.setText(Integer.toString(dumb));
 		    }
 		});
-		txtInput.setBounds(101, 4, 395, 25);
+		txtInput.setBounds(116, 18, 606, 59);
 		
 		Button btnFormatAll = new Button(container, SWT.NONE);
 		btnFormatAll.addSelectionListener(new SelectionAdapter() {
@@ -73,84 +86,96 @@ public class GUI extends ApplicationWindow {
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnFormatAll.setBounds(502, 2, 75, 25);
+		btnFormatAll.setBounds(728, 18, 75, 59);
 		btnFormatAll.setText("Format All");
 		
 		/************************* Get Number Button ****************************/
 		Button btnGetNumber = new Button(container, SWT.NONE);
+		btnGetNumber.setForeground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
 		btnGetNumber.addSelectionListener(new SelectionAdapter() {
-			// Click to get number button
+			// Click to Get Number button
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				//format.setInput(txtInput.getText());
-				//listNumbers.setText(format.getNumberList(format.getInput()));
-				listNumbers.setText(txtInput.getText());
-		
+				// Call method get number list from Basic Format class
+				txtNumberResult.setText(format.getNumberList(txtInput.getText()));
 			}
 		});
-		btnGetNumber.setBounds(10, 40, 85, 25);
+		btnGetNumber.setBounds(10, 91, 99, 46);
 		btnGetNumber.setText("Get Number");
 		
-		Button btnRemoveHTML = new Button(container, SWT.NONE);
-		btnRemoveHTML.setText("Remove HTML");
-		btnRemoveHTML.setBounds(10, 80, 85, 25);
-		
+		/************************* Re-Format Button ****************************/
 		Button btnReformat = new Button(container, SWT.NONE);
+		btnReformat.addSelectionListener(new SelectionAdapter() {
+			// Click to Re-Format button
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// Call method Re-Format from Basic Format class
+				txtNumberResult.setText(format.reformatText(txtInput.getText()));
+			}
+		});
 		btnReformat.setText("Re-Format");
-		btnReformat.setBounds(10, 124, 85, 25);
+		btnReformat.setBounds(10, 156, 99, 46);
 		
+		/*************************** Break Button ******************************/
 		Button btnBreak = new Button(container, SWT.NONE);
 		btnBreak.setText("Break");
-		btnBreak.setBounds(10, 170, 85, 25);
+		btnBreak.setBounds(10, 221, 99, 46);
 		
+		
+		/**************************** Sort Button ******************************/
 		Button btnSort = new Button(container, SWT.NONE);
 		btnSort.setText("Sort");
-		btnSort.setBounds(10, 249, 85, 25);
+		btnSort.setBounds(10, 340, 99, 46);
 		
-		Button btnCaseF = new Button(container, SWT.NONE);
-		btnCaseF.setText("CaseF");
-		btnCaseF.setBounds(10, 330, 85, 25);
+		/***************************** CaseF Button ****************************/
+		Button btnAdvanceFormat = new Button(container, SWT.NONE);
+		btnAdvanceFormat.setText("Advance Format");
+		btnAdvanceFormat.setBounds(10, 461, 99, 46);
 		
+		/*************************** Add line Button ***************************/
 		Button btnAddLine = new Button(container, SWT.NONE);
 		btnAddLine.setText("Add line");
-		btnAddLine.setBounds(10, 414, 85, 25);
+		btnAddLine.setBounds(10, 581, 99, 46);
 		
+		/********************* Number of Characters Label **********************/
 		lblNumberCharacters = new Label(container, SWT.NONE);
-		lblNumberCharacters.setBounds(10, 489, 17, 15);
+		lblNumberCharacters.setBounds(10, 656, 17, 15);
 		lblNumberCharacters.setText("0");
 		
 		Label lblCharacters = new Label(container, SWT.NONE);
-		lblCharacters.setBounds(30, 489, 63, 15);
+		lblCharacters.setBounds(32, 656, 63, 15);
 		lblCharacters.setText("Characters");
 		
-		Label lblNumberWords = new Label(container, SWT.NONE);
-		lblNumberWords.setBounds(104, 489, 17, 15);
+		/*********************** Number of Words Label ************************/
+		lblNumberWords = new Label(container, SWT.NONE);
+		lblNumberWords.setBounds(10, 677, 17, 15);
 		lblNumberWords.setText("0");
 		
 		Label lblWords = new Label(container, SWT.NONE);
-		lblWords.setBounds(127, 489, 55, 15);
+		lblWords.setBounds(33, 677, 55, 15);
 		lblWords.setText("Words");
 		
-		List listBreakLines = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		listBreakLines.setBounds(101, 170, 395, 68);
+		/************************ Text to show results ************************/
+		txtNumberResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtNumberResult.setBounds(116, 91, 606, 59);
 		
-		List listSort = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		listSort.setBounds(101, 249, 395, 68);
+		txtReformatResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtReformatResult.setBounds(116, 156, 606, 59);
 		
-		List listCaseF = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		listCaseF.setBounds(101, 330, 395, 68);
+		txtBreakResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtBreakResult.setBounds(116, 221, 606, 113);
 		
-		List listLineNumber = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		listLineNumber.setBounds(101, 415, 395, 68);
+		txtSortResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtSortResult.setBounds(116, 340, 606, 115);
 		
-		List listNumbers = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		listNumbers.setBounds(101, 40, 395, 25);
+		txtCaseFResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtCaseFResult.setBounds(116, 461, 606, 114);
 		
-		List listNonHTML = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		listNonHTML.setBounds(101, 80, 395, 25);
+		txtAddLineResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtAddLineResult.setBounds(116, 581, 606, 111);
 		
-		List listReformat = new List(container, SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		listReformat.setBounds(101, 124, 395, 25);
+		Label label = new Label(container, SWT.SEPARATOR | SWT.HORIZONTAL);
+		label.setBounds(10, 83, 793, 2);
 
 		return container;
 	}
@@ -206,6 +231,6 @@ public class GUI extends ApplicationWindow {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(605, 600);
+		return new Point(836, 793);
 	}
 }

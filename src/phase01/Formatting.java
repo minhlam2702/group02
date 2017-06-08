@@ -1,13 +1,18 @@
 package phase01;
 
-public class BasicFormat {
+public class Formatting {
 
 	/************************** Attribute ************************/
-	private String input; // Input from user
+	private String input; // Raw text from user input
 	
 	// Constructor with parameter
-	protected BasicFormat(String input) {
+	protected Formatting(String input) {
 		this.input = input;
+	}
+	
+	// Constructor default
+	protected Formatting() {
+		this.input = "";
 	}
 	
 	// Get input
@@ -21,17 +26,17 @@ public class BasicFormat {
 	}
 	
 	/************************** METHOD ****************************/
-	// Get Number List
+	// Get Number List from raw text
 	protected String getNumberList(String str) {
 		return str;
 	}
 	
-	// Remove HTML tag
+	// Remove HTML tag from raw text
 	protected String removeHTML(String str) {
 		return "";
 	}
 	
-	// Re-Format String Basic
+	// Re-Format text after remove HTML tag 
 	protected String reformatText(String str) {
 		return "";
 	}
