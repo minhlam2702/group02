@@ -29,8 +29,9 @@ import org.eclipse.swt.events.ModifyEvent;
 
 public class GUI extends ApplicationWindow {
 	private Text txtInput;
+	private Text listNumbers;
 	private Label lblNumberCharacters;
-	private BasicFormat format;
+	private AdvanceFormat format = new AdvanceFormat("");
 
 	/**
 	 * Create the application window.
@@ -55,13 +56,13 @@ public class GUI extends ApplicationWindow {
 		lblInput.setText("Input");
 		
 		txtInput = new Text(container, SWT.BORDER);
-		// modifyText Event
+		// modifyText Event of txtInput
 		txtInput.addModifyListener(new ModifyListener() {
 			@Override
 		    public void modifyText(ModifyEvent e) {
 		    	int dumb = txtInput.getText().length();
-		    	// setText to label currently have some bug
-		    	// lblNumberCharacters.setText(Integer.toString(dumb));
+		    	// set current number of characters into lblNumberCharacters 
+		    	lblNumberCharacters.setText(Integer.toString(dumb));
 		    }
 		});
 		txtInput.setBounds(101, 4, 395, 25);
@@ -75,7 +76,18 @@ public class GUI extends ApplicationWindow {
 		btnFormatAll.setBounds(502, 2, 75, 25);
 		btnFormatAll.setText("Format All");
 		
+		/************************* Get Number Button ****************************/
 		Button btnGetNumber = new Button(container, SWT.NONE);
+		btnGetNumber.addSelectionListener(new SelectionAdapter() {
+			// Click to get number button
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				//format.setInput(txtInput.getText());
+				//listNumbers.setText(format.getNumberList(format.getInput()));
+				listNumbers.setText(txtInput.getText());
+		
+			}
+		});
 		btnGetNumber.setBounds(10, 40, 85, 25);
 		btnGetNumber.setText("Get Number");
 		
@@ -103,7 +115,7 @@ public class GUI extends ApplicationWindow {
 		btnAddLine.setText("Add line");
 		btnAddLine.setBounds(10, 414, 85, 25);
 		
-		Label lblNumberCharacters = new Label(container, SWT.NONE);
+		lblNumberCharacters = new Label(container, SWT.NONE);
 		lblNumberCharacters.setBounds(10, 489, 17, 15);
 		lblNumberCharacters.setText("0");
 		

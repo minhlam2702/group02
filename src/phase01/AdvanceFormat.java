@@ -2,6 +2,10 @@ package phase01;
 
 public class AdvanceFormat extends BasicFormat{
 	
+	/************************** Attribute ************************/
+	public static int lengthText = 0; // Total characters
+	public static int wordCount = 0; // Total words
+	
 	// Constructor with parameter
 	public AdvanceFormat(String input) {
 		super(input);
@@ -26,5 +30,10 @@ public class AdvanceFormat extends BasicFormat{
 	// Add line number for each line after sort
 	public String[] addLine(String[] str) {
 		return null;
+	}
+
+	// Count Words
+	public static int countWords(char c) {
+		return wordCount++;
 	}
 }
