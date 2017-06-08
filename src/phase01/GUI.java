@@ -6,6 +6,7 @@ import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -56,19 +57,23 @@ public class GUI extends ApplicationWindow {
 	 */
 	@Override
 	protected Control createContents(Composite parent) {
-		parent.setForeground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
-		parent.setEnabled(false);
-		Composite container = new Composite(parent, SWT.NO_BACKGROUND);
-		container.setBackground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
+		parent.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+		Composite container = new Composite(parent, SWT.NONE);
+		container.setEnabled(true);
+		container.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		container.setFont(SWTResourceManager.getFont("Segoe UI Semibold", 12, SWT.NORMAL));
+		container.setLayout(null);
+
 		
+		/****************************** Input Textbox ************************************/
 		Label lblInput = new Label(container, SWT.WRAP | SWT.SHADOW_IN | SWT.CENTER);
+		lblInput.setBounds(10, 18, 100, 46);
 		lblInput.setAlignment(SWT.CENTER);
 		lblInput.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
-		lblInput.setBounds(24, 31, 86, 46);
 		lblInput.setText("User Input");
 		
 		txtInput = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtInput.setBounds(116, 18, 606, 46);
 		// modifyText Event of txtInput
 		txtInput.addModifyListener(new ModifyListener() {
 			@Override
@@ -78,101 +83,111 @@ public class GUI extends ApplicationWindow {
 		    	lblNumberCharacters.setText(Integer.toString(dumb));
 		    }
 		});
-		txtInput.setBounds(116, 18, 606, 59);
 		
 		Button btnFormatAll = new Button(container, SWT.NONE);
+		btnFormatAll.setBounds(728, 18, 75, 46);
 		btnFormatAll.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnFormatAll.setBounds(728, 18, 75, 59);
 		btnFormatAll.setText("Format All");
 		
 		/************************* Get Number Button ****************************/
 		Button btnGetNumber = new Button(container, SWT.NONE);
+		btnGetNumber.setBounds(10, 91, 99, 46);
 		btnGetNumber.setForeground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
 		btnGetNumber.addSelectionListener(new SelectionAdapter() {
 			// Click to Get Number button
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				// Call method get number list from Basic Format class
+				// Call method get number list from Formatting class
 				txtNumberResult.setText(format.getNumberList(txtInput.getText()));
 			}
 		});
-		btnGetNumber.setBounds(10, 91, 99, 46);
 		btnGetNumber.setText("Get Number");
 		
 		/************************* Re-Format Button ****************************/
 		Button btnReformat = new Button(container, SWT.NONE);
+		btnReformat.setBounds(11, 143, 99, 46);
 		btnReformat.addSelectionListener(new SelectionAdapter() {
 			// Click to Re-Format button
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				// Call method Re-Format from Basic Format class
-				txtNumberResult.setText(format.reformatText(txtInput.getText()));
+				// Call method Re-Format from Formatting class
+				txtReformatResult.setText(format.reformatText(txtInput.getText()));
 			}
 		});
 		btnReformat.setText("Re-Format");
-		btnReformat.setBounds(10, 156, 99, 46);
 		
 		/*************************** Break Button ******************************/
 		Button btnBreak = new Button(container, SWT.NONE);
+		btnBreak.setBounds(11, 195, 99, 46);
 		btnBreak.setText("Break");
-		btnBreak.setBounds(10, 221, 99, 46);
 		
 		
 		/**************************** Sort Button ******************************/
 		Button btnSort = new Button(container, SWT.NONE);
+		btnSort.setBounds(10, 292, 99, 46);
 		btnSort.setText("Sort");
-		btnSort.setBounds(10, 340, 99, 46);
 		
 		/***************************** CaseF Button ****************************/
 		Button btnAdvanceFormat = new Button(container, SWT.NONE);
+		btnAdvanceFormat.setBounds(11, 389, 99, 46);
 		btnAdvanceFormat.setText("Advance Format");
-		btnAdvanceFormat.setBounds(10, 461, 99, 46);
 		
 		/*************************** Add line Button ***************************/
 		Button btnAddLine = new Button(container, SWT.NONE);
+		btnAddLine.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		btnAddLine.setBounds(11, 486, 99, 46);
 		btnAddLine.setText("Add line");
-		btnAddLine.setBounds(10, 581, 99, 46);
 		
 		/********************* Number of Characters Label **********************/
 		lblNumberCharacters = new Label(container, SWT.NONE);
-		lblNumberCharacters.setBounds(10, 656, 17, 15);
+		lblNumberCharacters.setBounds(21, 538, 17, 15);
 		lblNumberCharacters.setText("0");
 		
 		Label lblCharacters = new Label(container, SWT.NONE);
-		lblCharacters.setBounds(32, 656, 63, 15);
+		lblCharacters.setBounds(44, 538, 63, 15);
 		lblCharacters.setText("Characters");
 		
 		/*********************** Number of Words Label ************************/
 		lblNumberWords = new Label(container, SWT.NONE);
-		lblNumberWords.setBounds(10, 677, 17, 15);
+		lblNumberWords.setBounds(21, 559, 17, 15);
 		lblNumberWords.setText("0");
 		
 		Label lblWords = new Label(container, SWT.NONE);
-		lblWords.setBounds(33, 677, 55, 15);
+		lblWords.setBounds(44, 559, 55, 15);
 		lblWords.setText("Words");
 		
 		/************************ Text to show results ************************/
 		txtNumberResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-		txtNumberResult.setBounds(116, 91, 606, 59);
+		txtNumberResult.setBounds(116, 91, 606, 46);
+		txtNumberResult.setEnabled(false);
 		
 		txtReformatResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-		txtReformatResult.setBounds(116, 156, 606, 59);
+		txtReformatResult.setBounds(116, 143, 606, 46);
+		txtReformatResult.setEnabled(false);
 		
 		txtBreakResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-		txtBreakResult.setBounds(116, 221, 606, 113);
+		txtBreakResult.setBounds(116, 195, 606, 91);
+		txtBreakResult.setEnabled(false);
 		
 		txtSortResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-		txtSortResult.setBounds(116, 340, 606, 115);
+		txtSortResult.setBounds(116, 292, 606, 91);
+		txtSortResult.setEnabled(false);
 		
 		txtCaseFResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-		txtCaseFResult.setBounds(116, 461, 606, 114);
+		txtCaseFResult.setBounds(116, 389, 606, 91);
+		txtCaseFResult.setEnabled(false);
 		
 		txtAddLineResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
-		txtAddLineResult.setBounds(116, 581, 606, 111);
+		txtAddLineResult.setBounds(116, 486, 606, 91);
+		txtAddLineResult.setEnabled(false);
 		
 		Label label = new Label(container, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label.setBounds(10, 83, 793, 2);
@@ -231,6 +246,6 @@ public class GUI extends ApplicationWindow {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(836, 793);
+		return new Point(828, 664);
 	}
 }

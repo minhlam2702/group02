@@ -27,11 +27,6 @@ public class TextUtilities extends Formatting{
 		return null;
 	}
 	
-	// Advance format text after re-format text
-	public String getAdvanceFormat(String str) {
-		return null;
-	}
-	
 	// Add line number for each line after sort text
 	public String addLine(String str) {
 		return null;
@@ -40,5 +35,10 @@ public class TextUtilities extends Formatting{
 	// Count Words from input text
 	public static int countWords(char c) {
 		return wordCount++;
+	}
+	
+	// Get Number List from raw text
+	public String getNumberList(String str) {
+		return str;
 	}
 }
