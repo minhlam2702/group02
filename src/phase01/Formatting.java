@@ -28,39 +28,52 @@ public class Formatting {
 	/************************** METHOD ****************************/
 	// Remove HTML tag from raw text
 	protected String removeHTML(String str) {
-		return str;
+		return str.replaceAll("\\<.*?>","");
 	}
 	
 	// Re-Format text after remove HTML tag 
 	protected String reformatText(String str) {
-		String result = str.replaceAll("\\s{2,}", " ").trim();
-		StringBuilder temp = new StringBuilder(result.length());
-        //First one is capital!
+		// Remove HTML tag
+		str = this.removeHTML(str);
+		
+		// Remove extra space
+		str = str.replaceAll("\\s{2,}", " ").trim();
+		
+		// Upper case letter after period
+		StringBuilder temp = new StringBuilder(str.length());
+        // First one is capital!
         boolean capitalize = true;
 
-        //Go through all the characters in the sentence.
-        for(int i = 0; i < result.length(); i++) {
-            //Get current char
-            char c = result.charAt(i);
+        // Go through all the characters in the sentence.
+        for(int i = 0; i < str.length(); i++) {
+            // Get current char
+            char c = str.charAt(i);
 
-            //If it's period then set next one to capital
+            // If it's period then set next one to capital
             if(c == '.') {
                 capitalize = true;
             }
-            //If it's alphabetic character...
+            // If it's alphabetic character...
             else if(capitalize && Character.isAlphabetic(c)) {
-                //...we turn it to uppercase
+                // Turn it to uppercase
                 c = Character.toUpperCase(c);
-                //Don't capitalize next characters
+                // Don't capitalize next characters
                 capitalize = false;
             }
 
-            //Accumulate in result
+            // Accumulate in result
             temp.append(c);
         }
-        result = temp.toString();
-        result = result.replaceAll("[,.!?;:]", "$0 ").replaceAll("\\s+", " ");
-        return result.replaceAll("\\s+(?=\\p{Punct})", "");
+        str = temp.toString();
+        
+        // Add a spacing after punctuation
+        str = str.replaceAll("[,.!?;:]", "$0 ");
+        
+        // Remove a spacing before punctuation (. , : ?)
+        str = str.replace(" .", ".");
+        str = str.replace(" ,", ",");
+        str = str.replace(" :", ":");
+        return str.replace(" ?", "?");
 	}
 	
 	// Advance format text after re-format text

@@ -2,11 +2,9 @@ package phase01;
 
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.StatusLineManager;
-import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -14,17 +12,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import com.sun.glass.ui.Pixels.Format;
-
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.events.KeyAdapter;
-import org.eclipse.swt.events.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -72,7 +62,7 @@ public class GUI extends ApplicationWindow {
 		lblInput.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
 		lblInput.setText("User Input");
 		
-		txtInput = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtInput = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
 		txtInput.setBounds(116, 18, 606, 46);
 		// modifyText Event of txtInput
 		txtInput.addModifyListener(new ModifyListener() {
@@ -165,29 +155,29 @@ public class GUI extends ApplicationWindow {
 		lblWords.setText("Words");
 		
 		/************************ Text to show results ************************/
-		txtNumberResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtNumberResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
+		txtNumberResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		txtNumberResult.setBounds(116, 91, 606, 46);
-		txtNumberResult.setEnabled(false);
 		
-		txtReformatResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtReformatResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
+		txtReformatResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		txtReformatResult.setBounds(116, 143, 606, 46);
-		txtReformatResult.setEnabled(false);
 		
-		txtBreakResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtBreakResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
+		txtBreakResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		txtBreakResult.setBounds(116, 195, 606, 91);
-		txtBreakResult.setEnabled(false);
 		
-		txtSortResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtSortResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
+		txtSortResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		txtSortResult.setBounds(116, 292, 606, 91);
-		txtSortResult.setEnabled(false);
 		
-		txtCaseFResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtCaseFResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
+		txtCaseFResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		txtCaseFResult.setBounds(116, 389, 606, 91);
-		txtCaseFResult.setEnabled(false);
 		
-		txtAddLineResult = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL);
+		txtAddLineResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
+		txtAddLineResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		txtAddLineResult.setBounds(116, 486, 606, 91);
-		txtAddLineResult.setEnabled(false);
 		
 		Label label = new Label(container, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label.setBounds(10, 83, 793, 2);
