@@ -21,7 +21,9 @@ import org.eclipse.wb.swt.SWTResourceManager;
 
 public class GUI extends ApplicationWindow {
 	private Text txtInput;
+	private Label lblCharacters;
 	private Label lblNumberCharacters;
+	private Label lblWords;
 	private Label lblNumberWords;
 	private Text txtNumberResult;
 	private Text txtReformatResult;
@@ -71,6 +73,19 @@ public class GUI extends ApplicationWindow {
 		    	int dumb = txtInput.getText().length();
 		    	// set current number of characters into lblNumberCharacters 
 		    	lblNumberCharacters.setText(Integer.toString(dumb));
+		    	if (dumb == 1) {
+		    		lblCharacters.setText("Character");
+		    	} else {
+		    		lblCharacters.setText("Characters");
+		    	}
+		    	// Set current number of words into lblNumberWords
+		    	lblNumberWords.setText(Integer.toString(format.countWords(txtInput.getText())));
+		    	if (format.countWords(txtInput.getText()) == 1) {
+		    		lblWords.setText("Word");
+		    	} else {
+		    		lblWords.setText("Words");
+		    	}
+		    	
 		    }
 		});
 		
@@ -92,7 +107,7 @@ public class GUI extends ApplicationWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// Call method get number list from Formatting class
-				txtNumberResult.setText(format.getNumberList(txtInput.getText()));
+				txtNumberResult.setText(format.printArrayInt(format.getNumberList(txtInput.getText())));
 			}
 		});
 		btnGetNumber.setText("Get Number");
@@ -141,7 +156,7 @@ public class GUI extends ApplicationWindow {
 		lblNumberCharacters.setBounds(21, 538, 17, 15);
 		lblNumberCharacters.setText("0");
 		
-		Label lblCharacters = new Label(container, SWT.NONE);
+		lblCharacters = new Label(container, SWT.NONE);
 		lblCharacters.setBounds(44, 538, 63, 15);
 		lblCharacters.setText("Characters");
 		
@@ -150,7 +165,7 @@ public class GUI extends ApplicationWindow {
 		lblNumberWords.setBounds(21, 559, 17, 15);
 		lblNumberWords.setText("0");
 		
-		Label lblWords = new Label(container, SWT.NONE);
+		lblWords = new Label(container, SWT.NONE);
 		lblWords.setBounds(44, 559, 55, 15);
 		lblWords.setText("Words");
 		
