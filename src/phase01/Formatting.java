@@ -77,8 +77,24 @@ public class Formatting {
 	}
 	
 	// Advance format text after re-format text
-	protected String advanceFormatText(String str) {
-		return null;
+	protected String[] advanceFormatText(String str) {
+		char[] arrChar = str.toCharArray();
+		String[] result = {"", ""};
+		for (char c:arrChar){
+			if(c >= 65 && c <= 90){
+				result[0] += c;
+				result[1] += (char)(c += 32);
+			}
+			else if (c >= 97 && c <= 122){
+				result[1] += c;
+				result[0] += (char)(c -= 32); 
+			}
+			else{
+				result[0] += c;
+				result[1] += c;
+			}
+		}
+		return result;
 	}
 		
 	

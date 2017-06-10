@@ -21,8 +21,10 @@ public class TextUtilities extends Formatting{
 	
 	/************************** METHOD **************************/
 	// Break lines text after re-format
-	public String breakLines(String str) {
-		return null;
+	public String[] breakLines(String str) {	
+		str = this.reformatText(str);
+		String[] arr = str.split("(?<=[.])");
+		return arr;
 	}
 	
 	// Sort text after break lines
@@ -67,6 +69,14 @@ public class TextUtilities extends Formatting{
 		String result = "";
 		for(int i:arr) {
 			result+= arr[i] + ", ";
+		}
+		return result;
+	}
+	//Print array String
+	public String printArrayString(String[] arr){
+		String result = "";
+		for(String a:arr) {
+			result+= a + "\n";
 		}
 		return result;
 	}
