@@ -1,37 +1,62 @@
 package phase01;
 
-public class Formatting {
+public class PlainText {
 
 	/************************** Attribute ************************/
-	private String input; // Raw text from user input
+	private String value;
+	private int numberOfWords; // Total words
 	
 	// Constructor with parameter
-	protected Formatting(String input) {
-		this.input = input;
+	protected PlainText(String value) {
+		this.value = value;
+		this.numberOfWords = this.countWords(value);
 	}
 	
 	// Constructor default
-	protected Formatting() {
-		this.input = "";
+	protected PlainText() {
+		this.value = "";
+		this.numberOfWords = 0;
 	}
 	
-	// Get input
-	protected String getInput() {
-		return input;
+	// Get value
+	protected String getValue() {
+		return value;
 	}
 	
-	// Set input
-	protected void setInput(String input) {
-		this.input = input;
+	// Set value
+	protected void setValue(String value) {
+		this.value = value;
 	}
 	
+	// Get number of words
+	public int getNumberOfWords() {
+		return numberOfWords;
+	}
+	
+	// Set number of words
+	public void setNumberOfWords(int numberOfWords) {
+		this.numberOfWords = numberOfWords;
+	}
+
 	/************************** METHOD ****************************/
-	// Remove HTML tag from raw text
+	// Count Words from input text
+	public int countWords(String str) {
+		// Remove extra space
+		str = str.replaceAll("\\s{2,}", " ").trim();
+
+		if(str.charAt(0) != ' ') {
+			numberOfWords = 1;
+			numberOfWords+= str.length() - str.replaceAll(" ", "").length();
+		}
+		return numberOfWords;
+	}
+	
+	// Remove HTML tag from plain text
 	protected String removeHTML(String str) {
 		return str.replaceAll("\\<.*?>","");
 	}
 	
-	// Re-Format text after remove HTML tag 
+	// Re-Format plain text after remove HTML tag 
 	protected String reformatText(String str) {
 		// Remove HTML tag
 		str = this.removeHTML(str);
@@ -67,7 +92,7 @@ public class Formatting {
         str = temp.toString();
         
         // Add a spacing after punctuation
-        str = str.replaceAll("[,.!?;:]", "$0 ");
+        str = str.replaceAll("[,.!?;:]", "$0 ").replaceAll("\\s+", " ");
         
         // Remove a spacing before punctuation (. , : ?)
         str = str.replace(" .", ".");
@@ -75,11 +100,4 @@ public class Formatting {
         str = str.replace(" :", ":");
         return str.replace(" ?", "?");
 	}
-	
-	// Advance format text after re-format text
-	protected String advanceFormatText(String str) {
-		return null;
-	}
-		
-	
 }

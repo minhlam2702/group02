@@ -31,7 +31,8 @@ public class GUI extends ApplicationWindow {
 	private Text txtSortResult;
 	private Text txtCaseFResult;
 	private Text txtAddLineResult;
-	private TextUtilities format = new TextUtilities("");
+	private RichText rt = new RichText();
+	private Number number = new Number();
 
 	/**
 	 * Create the application window.
@@ -71,7 +72,7 @@ public class GUI extends ApplicationWindow {
 			@Override
 		    public void modifyText(ModifyEvent e) {
 		    	int dumb = txtInput.getText().length();
-		    	// set current number of characters into lblNumberCharacters 
+		    	// Set current number of characters into lblNumberCharacters 
 		    	lblNumberCharacters.setText(Integer.toString(dumb));
 		    	if (dumb == 1) {
 		    		lblCharacters.setText("Character");
@@ -79,8 +80,8 @@ public class GUI extends ApplicationWindow {
 		    		lblCharacters.setText("Characters");
 		    	}
 		    	// Set current number of words into lblNumberWords
-		    	lblNumberWords.setText(Integer.toString(format.countWords(txtInput.getText())));
-		    	if (format.countWords(txtInput.getText()) == 1) {
+		    	lblNumberWords.setText(Integer.toString(rt.countWords(txtInput.getText())));
+		    	if (rt.countWords(txtInput.getText()) == 1) {
 		    		lblWords.setText("Word");
 		    	} else {
 		    		lblWords.setText("Words");
@@ -107,7 +108,7 @@ public class GUI extends ApplicationWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// Call method get number list from Formatting class
-				txtNumberResult.setText(format.printArrayInt(format.getNumberList(txtInput.getText())));
+				txtNumberResult.setText(number.printArrayNumber(number.getArrayNumber(txtInput.getText())));
 			}
 		});
 		btnGetNumber.setText("Get Number");
@@ -120,13 +121,20 @@ public class GUI extends ApplicationWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// Call method Re-Format from Formatting class
-				txtReformatResult.setText(format.reformatText(txtInput.getText()));
+				txtReformatResult.setText(rt.reformatText(txtInput.getText()));
 			}
 		});
 		btnReformat.setText("Re-Format");
 		
 		/*************************** Break Button ******************************/
 		Button btnBreak = new Button(container, SWT.NONE);
+		btnBreak.addSelectionListener(new SelectionAdapter() {
+			// Click to break button
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtBreakResult.setText(rt.printArrayString(rt.breakLines(txtInput.getText())));
+			}
+		});
 		btnBreak.setBounds(11, 195, 99, 46);
 		btnBreak.setText("Break");
 		
@@ -138,6 +146,13 @@ public class GUI extends ApplicationWindow {
 		
 		/***************************** CaseF Button ****************************/
 		Button btnAdvanceFormat = new Button(container, SWT.NONE);
+		btnAdvanceFormat.addSelectionListener(new SelectionAdapter() {
+			// Click to advance format text button
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtCaseFResult.setText(rt.printArrayString(rt.advanceFormatText(txtInput.getText())));
+			}
+		});
 		btnAdvanceFormat.setBounds(11, 389, 99, 46);
 		btnAdvanceFormat.setText("Advance Format");
 		
