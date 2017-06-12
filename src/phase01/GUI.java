@@ -90,11 +90,34 @@ public class GUI extends ApplicationWindow {
 		    }
 		});
 		
+		/************************* Format All Button ****************************/
 		Button btnFormatAll = new Button(container, SWT.NONE);
 		btnFormatAll.setBounds(728, 18, 75, 46);
 		btnFormatAll.addSelectionListener(new SelectionAdapter() {
+			// Click to format all button
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				// Click to get number button
+				try {
+					txtNumberResult.setText(number.printArrayNumber(number.getArrayNumber(txtInput.getText())));
+				} catch (Exception ex){
+					txtNumberResult.setText("");
+				}
+				
+				// Click to Re-Format button
+				txtReformatResult.setText(rt.reformatText(txtInput.getText()));
+
+				// Click to break button
+				txtBreakResult.setText(rt.printArrayString(rt.breakLines(txtInput.getText())));
+				
+				// Click to sort button
+				txtSortResult.setText(rt.printArrayString(rt.sortText(txtInput.getText())));
+				
+				// Click to CaseF button
+				txtCaseFResult.setText(rt.printArrayString(rt.advanceFormatText(txtInput.getText())));
+				
+				// Click to add line button
+				txtAddLineResult.setText(rt.printArrayString(rt.addLine(txtInput.getText())));
 			}
 		});
 		btnFormatAll.setText("Format All");
@@ -108,7 +131,11 @@ public class GUI extends ApplicationWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// Call method get number list from Formatting class
-				txtNumberResult.setText(number.printArrayNumber(number.getArrayNumber(txtInput.getText())));
+				try {
+					txtNumberResult.setText(number.printArrayNumber(number.getArrayNumber(txtInput.getText())));
+				} catch (Exception ex){
+					txtNumberResult.setText("");
+				}
 			}
 		});
 		btnGetNumber.setText("Get Number");
@@ -141,6 +168,13 @@ public class GUI extends ApplicationWindow {
 		
 		/**************************** Sort Button ******************************/
 		Button btnSort = new Button(container, SWT.NONE);
+		btnSort.addSelectionListener(new SelectionAdapter() {
+			// Click to sort button
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				txtSortResult.setText(rt.printArrayString(rt.sortText(txtInput.getText())));
+			}
+		});
 		btnSort.setBounds(10, 292, 99, 46);
 		btnSort.setText("Sort");
 		
@@ -159,8 +193,10 @@ public class GUI extends ApplicationWindow {
 		/*************************** Add line Button ***************************/
 		Button btnAddLine = new Button(container, SWT.NONE);
 		btnAddLine.addSelectionListener(new SelectionAdapter() {
+			// Click to add line button
 			@Override
 			public void widgetSelected(SelectionEvent e) {
+				txtAddLineResult.setText(rt.printArrayString(rt.addLine(txtInput.getText())));
 			}
 		});
 		btnAddLine.setBounds(11, 486, 99, 46);

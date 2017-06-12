@@ -7,18 +7,23 @@ public class Number extends PlainText {
 	/************************** Attribute ************************/	
 	// Get Number List from Plain Text
 	public int[] getArrayNumber(String str) {
-		str = str.replaceAll("[^0-9]+", " ");
-		Scanner scanner = new Scanner(str);
-		ArrayList<Integer> list = new ArrayList<Integer>();
-		while (scanner.hasNextInt()) {
-			list.add(scanner.nextInt());
+		try {
+			str = str.replaceAll("[^0-9]+", " ");
+			Scanner scanner = new Scanner(str);
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			while (scanner.hasNextInt()) {
+				list.add(scanner.nextInt());
+			}
+			int[] result = new int[list.size()];
+			for (int i=0; i<list.size(); i++) {
+				result[i] = list.get(i);
+			}
+			scanner.close();
+			return result;
+		} catch (Exception e) {
+			return null;
 		}
-		int[] result = new int[list.size()];
-		for (int i=0; i<list.size(); i++) {
-			result[i] = list.get(i);
-		}
-		scanner.close();
-		return result;
+		
 	}
 	
 	// Print array of Number
