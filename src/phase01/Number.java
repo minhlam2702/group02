@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Number extends PlainText {
-	/************************** Attribute ************************/	
+		
+	// Constructor default
+	public Number() {}
+	
 	// Get Number List from Plain Text
 	public int[] getArrayNumber(String str) {
 		try {

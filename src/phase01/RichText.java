@@ -1,8 +1,9 @@
 package phase01;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class RichText extends PlainText{
+public class RichText extends PlainText {
 	
 	// Constructor with parameter
 	public RichText(String value) {
@@ -15,27 +16,31 @@ public class RichText extends PlainText{
 	}
 	
 	/************************** METHOD **************************/
-	// Break lines text after re-format
+	// Break lines after re-format text
 	public String[] breakLines(String str) {
-        str = this.reformatText(str);
+		// Call method reformat text from super class
+        str = super.reformatText(str);
+        
+        // Split string by period
         String[] arr = str.split("(?<=[.])");
         
-        //String[] arr = str.split("\\.");
+        // Reformat text for each line
         for(int i=0; i<arr.length; i++){
-        	arr[i] = this.reformatText(arr[i]);
+        	arr[i] = super.reformatText(arr[i]);
         }
         
-        if(arr[arr.length-1].equals("")) {
-			String[] result = new String[arr.length-1];
-			for(int i=0; i<arr.length-1; i++) {
-				result[i] = arr[i];
-			}
-			return result;
-        }
-        return arr;
+        // Remove the extra lines
+        ArrayList<String> result = new ArrayList<>();
+		for(String s:arr) {
+        	if(!s.equals("")) {
+				result.add(s);
+		    }
+		}
+		// Convert from ArrayList to String Array
+        return result.toArray(new String[result.size()]);
 	}
 	
-	// Sort text after break lines
+	// Sort after break lines
 	public String[] sortText(String str) {
 		String[] result = this.breakLines(str);
 		Arrays.sort(result);
@@ -55,29 +60,17 @@ public class RichText extends PlainText{
 	public String[] advanceFormatText(String str) {
 		str = super.reformatText(str);
 		char[] arrChar = str.toCharArray();
-		boolean flag = true; // non-characters
+		boolean flag = false; // Text doesn't have any letter in the alphabet
 		for (char c:arrChar){
 			if((c >= 65 && c <= 90) || (c >= 97 && c <= 122)) {
-				flag = false;
+				flag = true; // Text has at least one letter in the alphabet
 			}
 		}
 		
-		if(flag == false) {
+		if(flag == true) {
 			String[] result = {"", ""};
-			for (char c:arrChar){
-				if(c >= 65 && c <= 90){
-					result[0] += c;
-					result[1] += (char)(c += 32);
-				}
-				else if (c >= 97 && c <= 122){
-					result[1] += c;
-					result[0] += (char)(c -= 32); 
-				}
-				else{
-					result[0] += c;
-					result[1] += c;
-				}
-			}
+			result[0] = str.toUpperCase();
+			result[1] = str.toLowerCase();
 			return result;
 		} else {
 			String[] result = {str};
