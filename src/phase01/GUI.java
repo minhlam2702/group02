@@ -294,7 +294,7 @@ public class GUI extends ApplicationWindow {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("GROUP 02");
+		newShell.setText("GROUP 02 - FORMAT TEXT");
 	}
 
 	/**
