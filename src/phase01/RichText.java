@@ -3,6 +3,8 @@ package phase01;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
+
 public class RichText extends PlainText {
 	
 	// Constructor with parameter
@@ -19,53 +21,59 @@ public class RichText extends PlainText {
 	// Break lines after re-format text
 	public String[] breakLines(String str) {
 		// Call method reformat text from super class
-		str = super.reformatText(str);
+		// Call method reformat text from super class
+        str = super.reformatText(str);
         
-	      //Convert again the String by character to prevent the case "\n" to "\\n" when converting from SWT text to String 
-	        String text = ""; 
-	        int j = 0;
-	        while (j < str.length()){
-	        	if(str.length()>0){
-	        		//Replace "\n." to "."
-		        	if (str.charAt(j)==92 && str.charAt(j+1)==78 || str.charAt(j)==92 && str.charAt(j+1)==110){
-		        		if (str.charAt(j+2)==46){
-		        			text += ".";
-			        		str = str.substring(j+3, str.length());
-		        		}
-		        		else{
-		        			text += "\n";
-			        		str = str.substring(j+2, str.length());
-		        		}
-		        	}
-		        	else {
-		        		if (str.charAt(j)==46 && str.charAt(j+1)==46) {
-		        			text += "";
-		        		}
-			        	else text += str.charAt(j);
-			        	str = str.substring(j+1, str.length());;
-		        	}
+      //Convert again the String by character to prevent the case "\n" to "\\n" when converting from SWT text to String 
+        String text = ""; 
+        int j = 0;
+        while (j < str.length()){
+        	if(str.length()>0){
+        		//Replace "\n." to "."
+	        	if (str.charAt(j)==92 && str.charAt(j+1)==78 || str.charAt(j)==92 && str.charAt(j+1)==110){
+	        		if (str.charAt(j+2)==46){
+	        			text += ".";
+		        		str = str.substring(j+3, str.length());
+	        		}
+	        		else{
+	        			text += "\n";
+		        		str = str.substring(j+2, str.length());
+	        		}
 	        	}
-	        	else text += str.substring(str.length());
-	        }
-	        
-	        // Replace String by break line and period
-	        text = text.replaceAll("\\s\n", ".").replaceAll("\\s\\.{2,}", ".").replaceAll("\\.{2,}", ".");        
-	        String[] arr = text.split("(?<=[\\.])|[\n\\.]{2,}");
-	        
-	        // Reformat text for each line
-	        for(int i=0; i<arr.length; i++){
-	        	arr[i] = super.reformatText(arr[i]);
-	        }       
-	        
-	        // Remove the extra lines
-	        ArrayList<String> result = new ArrayList<>();
-			for(String s:arr) {
-	        	if(!s.equals("")) {
-					result.add(s);
-			    }
-			}
-			// Convert from ArrayList to String Array
-	        return result.toArray(new String[result.size()]);
+	        	else {
+	        		if (str.charAt(j)==46 && str.charAt(j+1)==46) {
+	        			text += "";
+	        			str = str.substring(j+2, str.length());
+	        		}
+		        	else text += str.charAt(j);
+		        	str = str.substring(j+1, str.length());;
+	        	}
+        	}
+        	else text += str.substring(str.length());
+        	if (str.length()==2){
+        		if (str.charAt(j)==92 && str.charAt(j+1)==78 || str.charAt(j)==92 && str.charAt(j+1)==110)
+        		break;
+        	}
+        }
+        
+        // Replace String by break line and period
+        text = text.replaceAll("\\s\n", ".").replaceAll("\\s\\.{2,}", ".").replaceAll("\\.{2,}", ".");        
+        String[] arr = text.split("(?<=[\\.])");
+        
+        // Reformat text for each line
+        for(int i=0; i<arr.length; i++){
+        	arr[i] = super.reformatText(arr[i]);
+        }       
+        
+        // Remove the extra lines
+        ArrayList<String> result = new ArrayList<>();
+		for(String s:arr) {
+        	if(!s.equals("")) {
+				result.add(s);
+		    }
+		}
+		// Convert from ArrayList to String Array
+        return result.toArray(new String[result.size()]);
 	}
 	
 	// Sort after break lines
@@ -109,8 +117,8 @@ public class RichText extends PlainText {
     //Print array String
   	public String printArrayString(String[] arr){
   		String result = "";
-  		for(String a:arr) {
-  			result+= a + "\n";
+  		for(String a:arr) {  			
+  			result+= a + "\n";			
   		}
   		return result;
   	}
