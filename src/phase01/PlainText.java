@@ -61,11 +61,15 @@ public class PlainText {
 		str = this.removeHTML(str);
 		
 		// Remove extra space
+<<<<<<< HEAD
 		str = this.removeExtraSpace(str);
 		
 		if(str.equals("")) {
 			return "";
 		}
+=======
+		str = this.removeExtraSpace(str);	
+>>>>>>> 78bdb4ed362136973d5000713f568a171d8ca091
 		
 		// Upper case the first letter in string
 		str = str.substring(0, 1).toUpperCase() + str.substring(1);
@@ -112,7 +116,11 @@ public class PlainText {
         return str.replace(" ?", "?");
 	}
 	
+<<<<<<< HEAD
 	// Split text by \r\n (new line) when user input text with enter
+=======
+	// Split input by \r\n (new line)
+>>>>>>> 78bdb4ed362136973d5000713f568a171d8ca091
 	protected String[] splitStringByNewLine(String str) {
 		String[] arr = str.split("(?<=[\\\r\n])");
 		ArrayList<String> arrList = new ArrayList<String>();

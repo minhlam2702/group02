@@ -124,8 +124,14 @@ public class GUI extends ApplicationWindow {
 					txtNumberResult.setText("");
 				}
 				
+<<<<<<< HEAD
 				// Click to format button
 				txtReformatResult.setText(rt.printArrayString(rt.reformatText(rt.splitStringByNewLine(txtInput.getText()))));
+=======
+				// Click to Re-Format button
+				txtReformatResult.setText(rt.printArrayString(rt.reformatText(rt.splitStringByNewLine(txtInput.getText()))));
+				//txtReformatResult.setText(rt.reformatText(txtInput.getText()));
+>>>>>>> 78bdb4ed362136973d5000713f568a171d8ca091
 
 				// Click to break button
 				txtBreakResult.setText(rt.printArrayString(rt.breakLines(rt.splitStringByNewLine(txtInput.getText()))));
@@ -180,6 +186,10 @@ public class GUI extends ApplicationWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// Call method Re-Format from Formatting class
+<<<<<<< HEAD
+=======
+				//txtReformatResult.setText(rt.reformatText(txtInput.getText()));
+>>>>>>> 78bdb4ed362136973d5000713f568a171d8ca091
 				txtReformatResult.setText(rt.printArrayString(rt.reformatText(rt.splitStringByNewLine(txtInput.getText()))));
 			}
 		});
@@ -420,6 +430,7 @@ public class GUI extends ApplicationWindow {
 	 * @param newShell
 	 */
 	@Override
+<<<<<<< HEAD
 	protected void configureShell(Shell shell) {
 		super.configureShell(shell);
 		shell.setText("GROUP 02 - FORMAT TEXT");
@@ -427,5 +438,18 @@ public class GUI extends ApplicationWindow {
 		final Image small = new Image(shell.getDisplay(), "images/icon.png");
 		final Image[] images = new Image[] { small };
 		shell.setImages(images);
+=======
+	protected void configureShell(Shell newShell) {
+		super.configureShell(newShell);
+		newShell.setText("GROUP 02 - FORMAT TEXT");
+	}
+
+	/**
+	 * Return the initial size of the window.
+	 */
+	@Override
+	protected Point getInitialSize() {
+		return new Point(828, 670);
+>>>>>>> 78bdb4ed362136973d5000713f568a171d8ca091
 	}
 }
