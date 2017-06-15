@@ -124,14 +124,11 @@ public class GUI extends ApplicationWindow {
 					txtNumberResult.setText("");
 				}
 				
-<<<<<<< HEAD
 				// Click to format button
 				txtReformatResult.setText(rt.printArrayString(rt.reformatText(rt.splitStringByNewLine(txtInput.getText()))));
-=======
+				
 				// Click to Re-Format button
 				txtReformatResult.setText(rt.printArrayString(rt.reformatText(rt.splitStringByNewLine(txtInput.getText()))));
-				//txtReformatResult.setText(rt.reformatText(txtInput.getText()));
->>>>>>> 78bdb4ed362136973d5000713f568a171d8ca091
 
 				// Click to break button
 				txtBreakResult.setText(rt.printArrayString(rt.breakLines(rt.splitStringByNewLine(txtInput.getText()))));
@@ -186,10 +183,6 @@ public class GUI extends ApplicationWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// Call method Re-Format from Formatting class
-<<<<<<< HEAD
-=======
-				//txtReformatResult.setText(rt.reformatText(txtInput.getText()));
->>>>>>> 78bdb4ed362136973d5000713f568a171d8ca091
 				txtReformatResult.setText(rt.printArrayString(rt.reformatText(rt.splitStringByNewLine(txtInput.getText()))));
 			}
 		});
@@ -306,7 +299,7 @@ public class GUI extends ApplicationWindow {
 		/********************* Number of Characters Label **********************/
 		lblNumberCharacters = new Label(container, SWT.NONE);
 		FormData fd_lblNumberCharacters = new FormData();
-		fd_lblNumberCharacters.right = new FormAttachment(0, 27);
+		fd_lblNumberCharacters.right = new FormAttachment(0, 43);
 		fd_lblNumberCharacters.top = new FormAttachment(0, 617);
 		fd_lblNumberCharacters.left = new FormAttachment(0, 10);
 		lblNumberCharacters.setLayoutData(fd_lblNumberCharacters);
@@ -315,9 +308,8 @@ public class GUI extends ApplicationWindow {
 		
 		lblCharacters = new Label(container, SWT.NONE);
 		FormData fd_lblCharacters = new FormData();
-		fd_lblCharacters.right = new FormAttachment(0, 96);
-		fd_lblCharacters.top = new FormAttachment(0, 617);
-		fd_lblCharacters.left = new FormAttachment(0, 33);
+		fd_lblCharacters.top = new FormAttachment(btnAddLine, 16);
+		fd_lblCharacters.right = new FormAttachment(0, 106);
 		lblCharacters.setLayoutData(fd_lblCharacters);
 		lblCharacters.setText("Characters");
 		lblCharacters.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
@@ -325,7 +317,7 @@ public class GUI extends ApplicationWindow {
 		/*********************** Number of Words Label ************************/
 		lblNumberWords = new Label(container, SWT.NONE);
 		FormData fd_lblNumberWords = new FormData();
-		fd_lblNumberWords.right = new FormAttachment(0, 27);
+		fd_lblNumberWords.right = new FormAttachment(lblNumberCharacters, 0, SWT.RIGHT);
 		fd_lblNumberWords.top = new FormAttachment(0, 638);
 		fd_lblNumberWords.left = new FormAttachment(0, 10);
 		lblNumberWords.setLayoutData(fd_lblNumberWords);
@@ -333,10 +325,10 @@ public class GUI extends ApplicationWindow {
 		lblNumberWords.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		
 		lblWords = new Label(container, SWT.NONE);
+		fd_lblCharacters.left = new FormAttachment(lblWords, 0, SWT.LEFT);
 		FormData fd_lblWords = new FormData();
-		fd_lblWords.right = new FormAttachment(0, 88);
-		fd_lblWords.top = new FormAttachment(0, 638);
-		fd_lblWords.left = new FormAttachment(0, 33);
+		fd_lblWords.left = new FormAttachment(lblNumberWords);
+		fd_lblWords.top = new FormAttachment(lblCharacters, 6);
 		lblWords.setLayoutData(fd_lblWords);
 		lblWords.setText("Words");
 		lblWords.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
@@ -388,6 +380,7 @@ public class GUI extends ApplicationWindow {
 		txtCaseFResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		
 		txtAddLineResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
+		fd_lblWords.right = new FormAttachment(txtAddLineResult, -18);
 		FormData fd_txtAddLineResult = new FormData();
 		fd_txtAddLineResult.bottom = new FormAttachment(0, 661);
 		fd_txtAddLineResult.right = new FormAttachment(0, 907);
@@ -430,7 +423,6 @@ public class GUI extends ApplicationWindow {
 	 * @param newShell
 	 */
 	@Override
-<<<<<<< HEAD
 	protected void configureShell(Shell shell) {
 		super.configureShell(shell);
 		shell.setText("GROUP 02 - FORMAT TEXT");
@@ -438,18 +430,5 @@ public class GUI extends ApplicationWindow {
 		final Image small = new Image(shell.getDisplay(), "images/icon.png");
 		final Image[] images = new Image[] { small };
 		shell.setImages(images);
-=======
-	protected void configureShell(Shell newShell) {
-		super.configureShell(newShell);
-		newShell.setText("GROUP 02 - FORMAT TEXT");
-	}
-
-	/**
-	 * Return the initial size of the window.
-	 */
-	@Override
-	protected Point getInitialSize() {
-		return new Point(828, 670);
->>>>>>> 78bdb4ed362136973d5000713f568a171d8ca091
 	}
 }
