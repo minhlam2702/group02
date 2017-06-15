@@ -1,5 +1,7 @@
 package phase01;
 
+import java.util.ArrayList;
+
 public class PlainText {
 
 	/************************** Attribute ************************/
@@ -18,22 +20,20 @@ public class PlainText {
 	/************************** METHOD ****************************/
 	/** Count words from plain text **/
 	protected int countWords(String str) {
-		if(str != null && str != "") {
+		if(str != null && !str.equals("")) {
 			// Remove extra space
 			str = this.removeExtraSpace(str);
-
-			if(str.charAt(0) != ' ') {
+			// If text is not equal ""
+			if(!str.equals("")) {
 				numberOfWords = 1;
 				numberOfWords+= str.length() - str.replaceAll(" ", "").length();
 			} else {
 				numberOfWords = 0;
 			}
-			return numberOfWords;
 		} else {
 			numberOfWords = 0;
-			return numberOfWords;
 		}
-		
+		return numberOfWords;
 	}
 	
 	/** Remove HTML tag from plain text **/
@@ -47,19 +47,33 @@ public class PlainText {
 		return str.replaceAll("\\s{2,}", " ").trim();
 	}
 	
-	/** Re-Format plain text after remove HTML tag **/
+	/** Format for array text **/
+	protected String[] reformatText(String[] str) {
+		for(int i=0; i<str.length; i++) {
+			str[i] = this.reformatText(str[i]);
+		}
+		return str;
+	}
+	
+	/** Format text after remove HTML tag **/
 	protected String reformatText(String str) {
 		// Remove HTML tag
 		str = this.removeHTML(str);
 		
 		// Remove extra space
 		str = this.removeExtraSpace(str);	
-
+		
+		// Upper case the first letter in string
+		str = str.substring(0, 1).toUpperCase() + str.substring(1);
+		
+		// Add a spacing after punctuation
+        str = str.replaceAll("[,.!?;:]", "$0 ").replaceAll("\\s+", " ");
+		
 		// Upper case letter after period
 		StringBuilder temp = new StringBuilder(str.length());
-		
+
 		// The first character after period is capitalize
-        boolean capitalize = true;
+        boolean capitalize = false;
         int flag = 0;
 
         // Go through all the characters in the sentence.
@@ -73,7 +87,7 @@ public class PlainText {
                 flag = 0;
             }
             // Uppercase character after period
-            else if(capitalize && Character.isAlphabetic(c) && flag <= 2) {
+            else if(capitalize && flag == 1) {
                 // Turn it to uppercase
                 c = Character.toUpperCase(c);
                 // Don't capitalize next characters
@@ -87,13 +101,22 @@ public class PlainText {
         }
         str = temp.toString();
         
-        // Add a spacing after punctuation
-        str = str.replaceAll("[,.!?;:]", "$0 ").replaceAll("\\s+", " ");
-        
         // Remove spacing before punctuation (. , : ?)
         str = str.replace(" .", ".");
         str = str.replace(" ,", ",");
         str = str.replace(" :", ":");
         return str.replace(" ?", "?");
+	}
+	
+	// Split input by \r\n (new line)
+	protected String[] splitStringByNewLine(String str) {
+		String[] arr = str.split("(?<=[\\\r\n])");
+		ArrayList<String> arrList = new ArrayList<String>();
+		for(String s:arr) {
+			if(!s.equals("\n") && !s.equals("\r")) {
+				arrList.add(s);
+			}
+		}
+		return arrList.toArray(new String[arrList.size()]);
 	}
 }

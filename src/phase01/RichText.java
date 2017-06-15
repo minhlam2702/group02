@@ -21,10 +21,9 @@ public class RichText extends PlainText {
 	// Break lines after re-format text
 	public String[] breakLines(String str) {
 		// Call method reformat text from super class
-		// Call method reformat text from super class
         str = super.reformatText(str);
         
-      //Convert again the String by character to prevent the case "\n" to "\\n" when converting from SWT text to String 
+        // Convert again the String by character to prevent the case "\n" to "\\n" when converting from SWT text to String 
         String text = ""; 
         int j = 0;
         while (j < str.length()){

@@ -105,7 +105,8 @@ public class GUI extends ApplicationWindow {
 				}
 				
 				// Click to Re-Format button
-				txtReformatResult.setText(rt.reformatText(txtInput.getText()));
+				txtReformatResult.setText(rt.printArrayString(rt.reformatText(rt.splitStringByNewLine(txtInput.getText()))));
+				//txtReformatResult.setText(rt.reformatText(txtInput.getText()));
 
 				// Click to break button
 				txtBreakResult.setText(rt.printArrayString(rt.breakLines(txtInput.getText())));
@@ -148,7 +149,8 @@ public class GUI extends ApplicationWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// Call method Re-Format from Formatting class
-				txtReformatResult.setText(rt.reformatText(txtInput.getText()));
+				//txtReformatResult.setText(rt.reformatText(txtInput.getText()));
+				txtReformatResult.setText(rt.printArrayString(rt.reformatText(rt.splitStringByNewLine(txtInput.getText()))));
 			}
 		});
 		btnReformat.setText("Re-Format");
@@ -302,6 +304,6 @@ public class GUI extends ApplicationWindow {
 	 */
 	@Override
 	protected Point getInitialSize() {
-		return new Point(828, 664);
+		return new Point(828, 670);
 	}
 }
