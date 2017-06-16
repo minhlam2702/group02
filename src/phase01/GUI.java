@@ -14,7 +14,6 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.events.ModifyEvent;
@@ -56,17 +55,23 @@ public class GUI extends ApplicationWindow {
 	 */
 	@Override
 	protected Control createContents(Composite parent) {
+		setStatus("");
 		parent.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 		Composite container = new Composite(parent, SWT.MAX);
-		container.setForeground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
 		container.setEnabled(true);
+		container.setForeground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
 		container.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		container.setFont(SWTResourceManager.getFont("Segoe UI Semibold", 13, SWT.NORMAL));
 		container.setBounds(0, 0, 0, 0);
-		
-		/****************************** Input Textbox ************************************/
-		container.setLayout(new FormLayout());
+		FormLayout fl_container = new FormLayout();
+		container.setLayout(fl_container);
 		txtInput = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
+		FormData fd_txtInput = new FormData();
+		fd_txtInput.bottom = new FormAttachment(0, 115);
+		fd_txtInput.right = new FormAttachment(0, 907);
+		fd_txtInput.top = new FormAttachment(0, 10);
+		fd_txtInput.left = new FormAttachment(0, 116);
+		txtInput.setLayoutData(fd_txtInput);
 		txtInput.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -76,12 +81,6 @@ public class GUI extends ApplicationWindow {
 		        }
 			}
 		});
-		FormData fd_txtInput = new FormData();
-		fd_txtInput.bottom = new FormAttachment(0, 115);
-		fd_txtInput.right = new FormAttachment(0, 907);
-		fd_txtInput.top = new FormAttachment(0, 10);
-		fd_txtInput.left = new FormAttachment(0, 116);
-		txtInput.setLayoutData(fd_txtInput);
 		// modifyText Event of txtInput
 		txtInput.addModifyListener(new ModifyListener() {
 			@Override
@@ -308,8 +307,9 @@ public class GUI extends ApplicationWindow {
 		
 		lblCharacters = new Label(container, SWT.NONE);
 		FormData fd_lblCharacters = new FormData();
-		fd_lblCharacters.top = new FormAttachment(btnAddLine, 16);
 		fd_lblCharacters.right = new FormAttachment(0, 106);
+		fd_lblCharacters.top = new FormAttachment(0, 617);
+		fd_lblCharacters.left = new FormAttachment(0, 43);
 		lblCharacters.setLayoutData(fd_lblCharacters);
 		lblCharacters.setText("Characters");
 		lblCharacters.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
@@ -317,7 +317,7 @@ public class GUI extends ApplicationWindow {
 		/*********************** Number of Words Label ************************/
 		lblNumberWords = new Label(container, SWT.NONE);
 		FormData fd_lblNumberWords = new FormData();
-		fd_lblNumberWords.right = new FormAttachment(lblNumberCharacters, 0, SWT.RIGHT);
+		fd_lblNumberWords.right = new FormAttachment(0, 43);
 		fd_lblNumberWords.top = new FormAttachment(0, 638);
 		fd_lblNumberWords.left = new FormAttachment(0, 10);
 		lblNumberWords.setLayoutData(fd_lblNumberWords);
@@ -325,10 +325,10 @@ public class GUI extends ApplicationWindow {
 		lblNumberWords.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		
 		lblWords = new Label(container, SWT.NONE);
-		fd_lblCharacters.left = new FormAttachment(lblWords, 0, SWT.LEFT);
 		FormData fd_lblWords = new FormData();
-		fd_lblWords.left = new FormAttachment(lblNumberWords);
-		fd_lblWords.top = new FormAttachment(lblCharacters, 6);
+		fd_lblWords.right = new FormAttachment(0, 98);
+		fd_lblWords.top = new FormAttachment(0, 638);
+		fd_lblWords.left = new FormAttachment(0, 43);
 		lblWords.setLayoutData(fd_lblWords);
 		lblWords.setText("Words");
 		lblWords.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
@@ -352,7 +352,7 @@ public class GUI extends ApplicationWindow {
 		txtReformatResult.setLayoutData(fd_txtReformatResult);
 		txtReformatResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		
-		txtBreakResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
+		txtBreakResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL | SWT.RIGHT);
 		FormData fd_txtBreakResult = new FormData();
 		fd_txtBreakResult.bottom = new FormAttachment(0, 440);
 		fd_txtBreakResult.right = new FormAttachment(0, 907);
@@ -380,7 +380,6 @@ public class GUI extends ApplicationWindow {
 		txtCaseFResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		
 		txtAddLineResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
-		fd_lblWords.right = new FormAttachment(txtAddLineResult, -18);
 		FormData fd_txtAddLineResult = new FormData();
 		fd_txtAddLineResult.bottom = new FormAttachment(0, 661);
 		fd_txtAddLineResult.right = new FormAttachment(0, 907);

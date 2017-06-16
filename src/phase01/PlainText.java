@@ -87,7 +87,7 @@ public class PlainText {
             char c = str.charAt(i);
 
             // If it's period then set next one to capital
-            if(c == '.') {
+            if(c == '.' || c == '!' || c == '?') {
                 capitalize = true;
                 flag = 0;
             }
@@ -106,10 +106,12 @@ public class PlainText {
         }
         str = temp.toString();
         
-        // Remove spacing before punctuation (. , : ?)
+        // Remove spacing before punctuation (. , : ? ! ;)
         str = str.replace(" .", ".");
         str = str.replace(" ,", ",");
         str = str.replace(" :", ":");
+        str = str.replace(" ;", ";");
+        str = str.replace(" !", "!");
         return str.replace(" ?", "?");
 	}
 	// Split text by \r\n (new line) when user input text with enter
