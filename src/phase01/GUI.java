@@ -85,7 +85,7 @@ public class GUI extends ApplicationWindow {
 		txtInput.addModifyListener(new ModifyListener() {
 			@Override
 		    public void modifyText(ModifyEvent e) {
-		    	int dumb = txtInput.getText().length();
+		    	int dumb = rt.countCharacters(txtInput.getText());
 		    	// Set current number of characters into lblNumberCharacters 
 		    	lblNumberCharacters.setText(Integer.toString(dumb));
 		    	if (dumb == 1) {
@@ -352,7 +352,7 @@ public class GUI extends ApplicationWindow {
 		txtReformatResult.setLayoutData(fd_txtReformatResult);
 		txtReformatResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		
-		txtBreakResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL | SWT.RIGHT);
+		txtBreakResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
 		FormData fd_txtBreakResult = new FormData();
 		fd_txtBreakResult.bottom = new FormAttachment(0, 440);
 		fd_txtBreakResult.right = new FormAttachment(0, 907);

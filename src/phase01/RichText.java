@@ -33,50 +33,59 @@ public class RichText extends PlainText {
 	
 	// Break lines after re-format text
 	public String[] breakLines(String str) {
-		  // Call method reformat text from super class
-		        str = super.reformatText(str);
-		        
-		        // Convert again the String by character to prevent the case "\n" to "\\n" when converting from SWT text to String 
-		        String text = ""; 
-		        int j = 0;
-		        while (j < str.length()){
-		         if(str.length()>0){
+	    // Call method reformat text from super class
+        str = super.reformatText(str);
+        if(str.equals("")) {
+        	String[] result = new String[1];
+        	result[0] = str;
+        	return result;
+        }
+        
+        // Convert again the String by character to prevent the case "\n" to "\\n" when converting from SWT text to String 
+        String text = ""; 
+        int j = 0;
+        while (j < str.length()) {
+	         if(str.length()>0){
 		          //Replace "\\n" to "\n"
 		          if (str.charAt(j)==92 && str.charAt(j+1)==78 || str.charAt(j)==92 && str.charAt(j+1)==110){
 		        	  text += "\n";
 		        	  str = str.substring(j+2, str.length());
 		          }
 		          else {
-		           if (str.charAt(j)==46) {
-		            text += ".";
-		           }
-		           else text += str.charAt(j);
-		           str = str.substring(j+1, str.length());;
+			           if (str.charAt(j)==46) {
+			            text += ".";
+			           }
+			           else {
+			        	   text += str.charAt(j);
+			           }
+			           str = str.substring(j+1, str.length());;
 		          }
-		         }
-		         else text += str.substring(str.length());
-		        }
-		        
-		        // Replace String by break line and period
-		        //text = text.replaceAll("\n{2,}", "\n").replaceAll("\\.{2,}", ".").replaceAll("\n\\.", ".");
-		        text = text.replaceAll("\n\\.", ".");    
-		        String[] arr = text.split("\\n|(?<=\\.)(?!\\.)");		        
-		        
-		        // Reformat text for each line
-		        for(int i=0; i<arr.length; i++){
-		        	arr[i] = super.reformatText(arr[i]);
-		        }       
-		        		        
-		        // Remove the extra lines
-		        ArrayList<String> result = new ArrayList<>();
-		        for(String s:arr) {
-		         //if(!s.equals("")) {
-		        	result.add(s);
-		        	//}
-		        }
-		        
-		        // Convert from ArrayList to String Array
-		        return result.toArray(new String[result.size()]);
+	        }
+	        else {
+	        	 text += str.substring(str.length());
+	        }
+        }
+        
+        // Replace String by break line and period
+        //text = text.replaceAll("\n{2,}", "\n").replaceAll("\\.{2,}", ".").replaceAll("\n\\.", ".");
+        text = text.replaceAll("\n\\.", ".");    
+        String[] arr = text.split("\\n|(?<=\\.)(?!\\.)");		        
+        
+        // Reformat text for each line
+        for(int i=0; i<arr.length; i++){
+        	arr[i] = super.reformatText(arr[i]);
+        }       
+        		        
+        // Remove the extra lines
+        ArrayList<String> result = new ArrayList<>();
+        for(String s:arr) {
+         //if(!s.equals("")) {
+        	result.add(s);
+        	//}
+        }
+        
+        // Convert from ArrayList to String Array
+        return result.toArray(new String[result.size()]);
 	}
 	
 	// Sort after break lines
@@ -90,7 +99,7 @@ public class RichText extends PlainText {
 	public String[] sortText(String[] str) {
 		String[] result = this.breakLines(str);
 		Arrays.sort(result);
-		return result;
+		return super.removeNullLines(result);
 	}
 	
 	// Add line number for each line after sort text

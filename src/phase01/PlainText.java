@@ -6,36 +6,53 @@ public class PlainText {
 
 	/************************** Attribute ************************/
 	private int numberOfWords; // Total words
+	private int numberOfCharacters; // Total characters
 	
 	// Constructor with parameter
 	protected PlainText(String value) {
 		this.numberOfWords = this.countWords(value);
+		this.numberOfCharacters = this.countCharacters(value);
 	}
 	
 	// Constructor default
 	protected PlainText() {
 		this.numberOfWords = 0;
+		this.numberOfCharacters = 0;
 	}
 	
 	/************************** METHOD ****************************/
 	/** Count words from plain text **/
 	protected int countWords(String str) {
-		if(str != null && !str.equals("")) {
-			// Remove extra space
-			str = this.removeExtraSpace(str);
-			// If text is not equal ""
-			if(!str.equals("")) {
-				numberOfWords = 1;
-				numberOfWords+= str.length() - str.replaceAll(" ", "").length();
+		try {
+			if(!str.equals(null) && !str.equals("")) {
+				// Remove extra space
+				str = this.removeExtraSpace(str);
+				// If text is not equal ""
+				if(!str.equals("")) {
+					numberOfWords = 1;
+					numberOfWords+= str.length() - str.replaceAll(" ", "").length();
+				} else {
+					numberOfWords = 0;
+				}
 			} else {
 				numberOfWords = 0;
 			}
-		} else {
-			numberOfWords = 0;
+			return numberOfWords;
+		} catch (Exception e) {
+			return 0;
 		}
-		return numberOfWords;
 	}
 	
+	/** Count characters from plain text **/
+	protected int countCharacters(String str) {
+		try {
+			str = str.replace("\r\n", "");
+			numberOfCharacters = str.length();
+			return numberOfCharacters;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
 	/** Remove HTML tag from plain text **/
 	protected String removeHTML(String str) {
 		return str.replaceAll("\\<.*?>","");
@@ -63,10 +80,10 @@ public class PlainText {
 		// Remove extra space
 		str = this.removeExtraSpace(str);
 		
+		// Return if string is empty
 		if(str.equals("")) {
-			return "";
-		}
-		str = this.removeExtraSpace(str);	
+			return str;
+		}	
 		
 		// Upper case the first letter in string
 		str = str.substring(0, 1).toUpperCase() + str.substring(1);
@@ -116,10 +133,24 @@ public class PlainText {
 	}
 	// Split text by \r\n (new line) when user input text with enter
 	protected String[] splitStringByNewLine(String str) {
-		String[] arr = str.split("(?<=[\\\r\n])");
+		String[] arr = str.split("(\\\\r\n)");
+		return arr;
+		/*
 		ArrayList<String> arrList = new ArrayList<String>();
 		for(String s:arr) {
 			if(!s.equals("\n") && !s.equals("\r")) {
+				arrList.add(s);
+			}
+		}
+		return arrList.toArray(new String[arrList.size()]); 
+		*/
+	}
+	
+	// Remove null lines for sort and add line functions
+	protected String[] removeNullLines(String[] str) {
+		ArrayList<String> arrList = new ArrayList<String>();
+		for(String s:str) {
+			if(!s.equals("\r\n") && !s.equals("")) {
 				arrList.add(s);
 			}
 		}
