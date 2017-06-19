@@ -3,8 +3,6 @@ package phase01;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
-
 public class RichText extends PlainText {
 	
 	// Constructor with parameter
@@ -157,12 +155,17 @@ public class RichText extends PlainText {
 					flag = true; // Text has at least one letter in the alphabet
 				}
 			}
-			if(flag == true) {
-				result.add(str[i].toUpperCase());
-				result.add(str[i].toLowerCase());
-			} else {
-				result.add(str[i]);
-				flag = false;
+		}
+		if(flag == true) {
+			for(String s:str){
+				result.add(s.toUpperCase());
+			}
+			for(String s:str){
+				result.add(s.toLowerCase());
+			}
+		} else {
+			for(String s:str){
+				result.add(s);
 			}
 		}
 		return result.toArray(new String[result.size()]);

@@ -133,7 +133,7 @@ public class PlainText {
 	}
 	// Split text by \r\n (new line) when user input text with enter
 	protected String[] splitStringByNewLine(String str) {
-		String[] arr = str.split("(\\\\r\n)");
+		String[] arr = str.split("(\\r\n)");
 		return arr;
 		/*
 		ArrayList<String> arrList = new ArrayList<String>();
