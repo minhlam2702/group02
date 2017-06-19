@@ -63,15 +63,9 @@ public class GUI extends ApplicationWindow {
 		container.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
 		container.setFont(SWTResourceManager.getFont("Segoe UI Semibold", 13, SWT.NORMAL));
 		container.setBounds(0, 0, 0, 0);
-		FormLayout fl_container = new FormLayout();
-		container.setLayout(fl_container);
+		container.setLayout(null);
 		txtInput = new Text(container, SWT.BORDER | SWT.WRAP | SWT.V_SCROLL | SWT.MULTI);
-		FormData fd_txtInput = new FormData();
-		fd_txtInput.bottom = new FormAttachment(0, 115);
-		fd_txtInput.right = new FormAttachment(0, 907);
-		fd_txtInput.top = new FormAttachment(0, 10);
-		fd_txtInput.left = new FormAttachment(0, 116);
-		txtInput.setLayoutData(fd_txtInput);
+		txtInput.setBounds(116, 10, 549, 232);
 		txtInput.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -106,12 +100,7 @@ public class GUI extends ApplicationWindow {
 		
 		/************************* Format All Button ****************************/
 		Button btnFormatAll = new Button(container, SWT.NONE);
-		FormData fd_btnFormatAll = new FormData();
-		fd_btnFormatAll.bottom = new FormAttachment(0, 115);
-		fd_btnFormatAll.right = new FormAttachment(0, 111);
-		fd_btnFormatAll.top = new FormAttachment(0, 75);
-		fd_btnFormatAll.left = new FormAttachment(0, 11);
-		btnFormatAll.setLayoutData(fd_btnFormatAll);
+		btnFormatAll.setBounds(10, 94, 100, 40);
 		btnFormatAll.addSelectionListener(new SelectionAdapter() {
 			// Click to format all button
 			@Override
@@ -147,12 +136,7 @@ public class GUI extends ApplicationWindow {
 		
 		/************************* Get Number Button ****************************/
 		Button btnGetNumber = new Button(container, SWT.NONE);
-		FormData fd_btnGetNumber = new FormData();
-		fd_btnGetNumber.bottom = new FormAttachment(0, 161);
-		fd_btnGetNumber.right = new FormAttachment(0, 111);
-		fd_btnGetNumber.top = new FormAttachment(0, 121);
-		fd_btnGetNumber.left = new FormAttachment(0, 12);
-		btnGetNumber.setLayoutData(fd_btnGetNumber);
+		btnGetNumber.setBounds(690, 718, 99, 40);
 		btnGetNumber.setForeground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
 		btnGetNumber.addSelectionListener(new SelectionAdapter() {
 			// Click to Get Number button
@@ -171,12 +155,7 @@ public class GUI extends ApplicationWindow {
 		
 		/************************* Format Button ****************************/
 		Button btnReformat = new Button(container, SWT.NONE);
-		FormData fd_btnReformat = new FormData();
-		fd_btnReformat.bottom = new FormAttachment(0, 217);
-		fd_btnReformat.right = new FormAttachment(0, 110);
-		fd_btnReformat.top = new FormAttachment(0, 172);
-		fd_btnReformat.left = new FormAttachment(0, 11);
-		btnReformat.setLayoutData(fd_btnReformat);
+		btnReformat.setBounds(11, 248, 99, 45);
 		btnReformat.addSelectionListener(new SelectionAdapter() {
 			// Click to Re-Format button
 			@Override
@@ -190,12 +169,7 @@ public class GUI extends ApplicationWindow {
 		
 		/*************************** Break Button ******************************/
 		Button btnBreak = new Button(container, SWT.NONE);
-		FormData fd_btnBreak = new FormData();
-		fd_btnBreak.bottom = new FormAttachment(0, 385);
-		fd_btnBreak.right = new FormAttachment(0, 110);
-		fd_btnBreak.top = new FormAttachment(0, 340);
-		fd_btnBreak.left = new FormAttachment(0, 11);
-		btnBreak.setLayoutData(fd_btnBreak);
+		btnBreak.setBounds(690, 8, 99, 45);
 		btnBreak.addSelectionListener(new SelectionAdapter() {
 			// Click to break button
 			@Override
@@ -208,12 +182,7 @@ public class GUI extends ApplicationWindow {
 		
 		/**************************** Sort Button ******************************/
 		Button btnSort = new Button(container, SWT.NONE);
-		FormData fd_btnSort = new FormData();
-		fd_btnSort.bottom = new FormAttachment(0, 489);
-		fd_btnSort.right = new FormAttachment(0, 110);
-		fd_btnSort.top = new FormAttachment(0, 444);
-		fd_btnSort.left = new FormAttachment(0, 11);
-		btnSort.setLayoutData(fd_btnSort);
+		btnSort.setBounds(690, 248, 99, 45);
 		btnSort.addSelectionListener(new SelectionAdapter() {
 			// Click to sort button
 			@Override
@@ -226,11 +195,7 @@ public class GUI extends ApplicationWindow {
 		
 		/***************************** CaseF Button ****************************/
 		Button btnAdvanceFormat = new Button(container, SWT.NONE);
-		FormData fd_btnAdvanceFormat = new FormData();
-		fd_btnAdvanceFormat.bottom = new FormAttachment(0, 297);
-		fd_btnAdvanceFormat.top = new FormAttachment(0, 252);
-		fd_btnAdvanceFormat.left = new FormAttachment(0, 11);
-		btnAdvanceFormat.setLayoutData(fd_btnAdvanceFormat);
+		btnAdvanceFormat.setBounds(10, 491, 100, 45);
 		btnAdvanceFormat.addSelectionListener(new SelectionAdapter() {
 			// Click to advance format text button
 			@Override
@@ -243,12 +208,7 @@ public class GUI extends ApplicationWindow {
 		
 		/*************************** Add line Button ***************************/
 		Button btnAddLine = new Button(container, SWT.NONE);
-		FormData fd_btnAddLine = new FormData();
-		fd_btnAddLine.bottom = new FormAttachment(0, 601);
-		fd_btnAddLine.right = new FormAttachment(0, 109);
-		fd_btnAddLine.top = new FormAttachment(0, 556);
-		fd_btnAddLine.left = new FormAttachment(0, 10);
-		btnAddLine.setLayoutData(fd_btnAddLine);
+		btnAddLine.setBounds(689, 491, 100, 45);
 		btnAddLine.addSelectionListener(new SelectionAdapter() {
 			// Click to add line button
 			@Override
@@ -261,12 +221,7 @@ public class GUI extends ApplicationWindow {
 		
 		/*********************** Clear Button ************************/
 		Button btnClear = new Button(container, SWT.NONE);
-		FormData fd_btnClear = new FormData();
-		fd_btnClear.bottom = new FormAttachment(0, 71);
-		fd_btnClear.right = new FormAttachment(0, 111);
-		fd_btnClear.top = new FormAttachment(0, 31);
-		fd_btnClear.left = new FormAttachment(0, 11);
-		btnClear.setLayoutData(fd_btnClear);
+		btnClear.setBounds(10, 48, 100, 40);
 		btnClear.setForeground(SWTResourceManager.getColor(SWT.COLOR_TITLE_BACKGROUND_GRADIENT));
 		btnClear.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -285,107 +240,56 @@ public class GUI extends ApplicationWindow {
 		
 		/****************************** Input Label ************************************/
 		Label lblInput = new Label(container, SWT.WRAP | SWT.SHADOW_IN | SWT.CENTER);
-		FormData fd_lblInput = new FormData();
-		fd_lblInput.bottom = new FormAttachment(0, 31);
-		fd_lblInput.right = new FormAttachment(0, 109);
-		fd_lblInput.top = new FormAttachment(0, 7);
-		fd_lblInput.left = new FormAttachment(0, 9);
-		lblInput.setLayoutData(fd_lblInput);
+		lblInput.setBounds(10, 21, 100, 17);
 		lblInput.setAlignment(SWT.CENTER);
 		lblInput.setFont(SWTResourceManager.getFont("Segoe UI", 10, SWT.BOLD));
 		lblInput.setText("User Input");
 		
 		/********************* Number of Characters Label **********************/
 		lblNumberCharacters = new Label(container, SWT.NONE);
-		FormData fd_lblNumberCharacters = new FormData();
-		fd_lblNumberCharacters.right = new FormAttachment(0, 43);
-		fd_lblNumberCharacters.top = new FormAttachment(0, 617);
-		fd_lblNumberCharacters.left = new FormAttachment(0, 10);
-		lblNumberCharacters.setLayoutData(fd_lblNumberCharacters);
+		lblNumberCharacters.setBounds(10, 710, 33, 15);
 		lblNumberCharacters.setText("0");
 		lblNumberCharacters.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		
 		lblCharacters = new Label(container, SWT.NONE);
-		FormData fd_lblCharacters = new FormData();
-		fd_lblCharacters.right = new FormAttachment(0, 106);
-		fd_lblCharacters.top = new FormAttachment(0, 617);
-		fd_lblCharacters.left = new FormAttachment(0, 43);
-		lblCharacters.setLayoutData(fd_lblCharacters);
+		lblCharacters.setBounds(43, 710, 63, 15);
 		lblCharacters.setText("Characters");
 		lblCharacters.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		
 		/*********************** Number of Words Label ************************/
 		lblNumberWords = new Label(container, SWT.NONE);
-		FormData fd_lblNumberWords = new FormData();
-		fd_lblNumberWords.right = new FormAttachment(0, 43);
-		fd_lblNumberWords.top = new FormAttachment(0, 638);
-		fd_lblNumberWords.left = new FormAttachment(0, 10);
-		lblNumberWords.setLayoutData(fd_lblNumberWords);
+		lblNumberWords.setBounds(10, 731, 33, 15);
 		lblNumberWords.setText("0");
 		lblNumberWords.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		
 		lblWords = new Label(container, SWT.NONE);
-		FormData fd_lblWords = new FormData();
-		fd_lblWords.right = new FormAttachment(0, 98);
-		fd_lblWords.top = new FormAttachment(0, 638);
-		fd_lblWords.left = new FormAttachment(0, 43);
-		lblWords.setLayoutData(fd_lblWords);
+		lblWords.setBounds(43, 731, 42, 15);
 		lblWords.setText("Words");
 		lblWords.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
 		
 		/************************ Text to show results ************************/
 		txtNumberResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
-		FormData fd_txtNumberResult = new FormData();
-		fd_txtNumberResult.bottom = new FormAttachment(0, 166);
-		fd_txtNumberResult.right = new FormAttachment(0, 907);
-		fd_txtNumberResult.top = new FormAttachment(0, 121);
-		fd_txtNumberResult.left = new FormAttachment(0, 116);
-		txtNumberResult.setLayoutData(fd_txtNumberResult);
+		txtNumberResult.setBounds(795, 718, 494, 40);
 		txtNumberResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		
 		txtReformatResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
-		FormData fd_txtReformatResult = new FormData();
-		fd_txtReformatResult.bottom = new FormAttachment(0, 246);
-		fd_txtReformatResult.right = new FormAttachment(0, 907);
-		fd_txtReformatResult.top = new FormAttachment(0, 172);
-		fd_txtReformatResult.left = new FormAttachment(0, 116);
-		txtReformatResult.setLayoutData(fd_txtReformatResult);
+		txtReformatResult.setBounds(116, 248, 549, 237);
 		txtReformatResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		
 		txtBreakResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
-		FormData fd_txtBreakResult = new FormData();
-		fd_txtBreakResult.bottom = new FormAttachment(0, 440);
-		fd_txtBreakResult.right = new FormAttachment(0, 907);
-		fd_txtBreakResult.top = new FormAttachment(0, 340);
-		fd_txtBreakResult.left = new FormAttachment(0, 116);
-		txtBreakResult.setLayoutData(fd_txtBreakResult);
+		txtBreakResult.setBounds(795, 10, 494, 233);
 		txtBreakResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		
 		txtSortResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
-		FormData fd_txtSortResult = new FormData();
-		fd_txtSortResult.bottom = new FormAttachment(0, 550);
-		fd_txtSortResult.right = new FormAttachment(0, 907);
-		fd_txtSortResult.top = new FormAttachment(0, 445);
-		fd_txtSortResult.left = new FormAttachment(0, 116);
-		txtSortResult.setLayoutData(fd_txtSortResult);
+		txtSortResult.setBounds(795, 248, 494, 237);
 		txtSortResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		
 		txtCaseFResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
-		FormData fd_txtCaseFResult = new FormData();
-		fd_txtCaseFResult.bottom = new FormAttachment(0, 334);
-		fd_txtCaseFResult.right = new FormAttachment(0, 907);
-		fd_txtCaseFResult.top = new FormAttachment(0, 252);
-		fd_txtCaseFResult.left = new FormAttachment(0, 116);
-		txtCaseFResult.setLayoutData(fd_txtCaseFResult);
+		txtCaseFResult.setBounds(116, 491, 549, 267);
 		txtCaseFResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 		
 		txtAddLineResult = new Text(container, SWT.BORDER | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
-		FormData fd_txtAddLineResult = new FormData();
-		fd_txtAddLineResult.bottom = new FormAttachment(0, 661);
-		fd_txtAddLineResult.right = new FormAttachment(0, 907);
-		fd_txtAddLineResult.top = new FormAttachment(0, 556);
-		fd_txtAddLineResult.left = new FormAttachment(0, 116);
-		txtAddLineResult.setLayoutData(fd_txtAddLineResult);
+		txtAddLineResult.setBounds(795, 491, 494, 221);
 		txtAddLineResult.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_HIGHLIGHT_SHADOW));
 
 		return container;
